@@ -1,0 +1,130 @@
+/**
+ * TransformPDF — Animations & Keyframes
+ * Developer: Rabiul Hasan | rabiulhasan613@gmail.com
+ */
+
+/* ── Entrance ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Continuous ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes spinReverse {
+  to { transform: rotate(-360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.15); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(14,165,233,0); }
+}
+
+/* ── Progress bar shimmer ── */
+@keyframes progressShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Toast ── */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(60px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes toastOut {
+  to   { opacity: 0; transform: translateX(60px) scale(0.9); }
+}
+@keyframes toastBar {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+/* ── Lightbox ── */
+@keyframes lbIn {
+  from { opacity: 0; transform: scale(0.86) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Gallery item ── */
+@keyframes itemReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Orbit ── */
+@keyframes orbit1 {
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit2 {
+  to { transform: rotate(-360deg); }
+}
+
+/* ── Scan line ── */
+@keyframes scanLine {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  30%, 70%  { opacity: 1; }
+  100%      { transform: translateX(100%); }
+}
+
+/* ── Upload particles ── */
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-70px) scale(0.5); }
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Page load stagger ── */
+.anim-1 { animation: fadeUp 0.7s 0.05s ease both; }
+.anim-2 { animation: fadeUp 0.7s 0.15s ease both; }
+.anim-3 { animation: fadeUp 0.7s 0.25s ease both; }
+.anim-4 { animation: fadeUp 0.7s 0.35s ease both; }
+.anim-5 { animation: fadeUp 0.7s 0.45s ease both; }

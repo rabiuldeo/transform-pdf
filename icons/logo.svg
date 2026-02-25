@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="50%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#bae6fd;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0ea5e9" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" filter="url(#shadow)"/>
+  <!-- Subtle grid pattern -->
+  <rect width="512" height="512" rx="112" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0"/>
+  <path d="M0 128 L512 128 M0 256 L512 256 M0 384 L512 384 M128 0 L128 512 M256 0 L256 512 M384 0 L384 512" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <!-- PDF Document icon (left) -->
+  <rect x="68" y="120" width="140" height="180" rx="14" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <rect x="68" y="120" width="140" height="44" rx="14" fill="rgba(255,255,255,0.18)"/>
+  <path d="M68 150 L208 150" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <!-- PDF text lines -->
+  <rect x="88" y="188" width="80" height="8" rx="4" fill="rgba(255,255,255,0.4)"/>
+  <rect x="88" y="206" width="100" height="6" rx="3" fill="rgba(255,255,255,0.25)"/>
+  <rect x="88" y="220" width="68" height="6" rx="3" fill="rgba(255,255,255,0.25)"/>
+  <rect x="88" y="234" width="88" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <rect x="88" y="248" width="56" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <!-- PDF label -->
+  <text x="138" y="142" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="800" fill="white" opacity="0.9">PDF</text>
+  <!-- Arrow (center) -->
+  <g transform="translate(256,210)">
+    <circle r="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <path d="M-10 0 L8 0 M4 -6 L12 0 L4 6" stroke="url(#arrow)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <!-- Image icon (right) -->
+  <rect x="304" y="120" width="140" height="180" rx="14" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <!-- Image placeholder mountains -->
+  <rect x="304" y="120" width="140" height="180" rx="14" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="340" cy="160" r="14" fill="rgba(255,255,255,0.3)"/>
+  <path d="M304 260 L340 210 L370 245 L390 225 L444 280 L444 300 L304 300 Z" fill="rgba(255,255,255,0.2)"/>
+  <path d="M304 275 L340 235 L380 258 L444 235 L444 300 L304 300 Z" fill="rgba(255,255,255,0.12)"/>
+  <!-- IMG label -->
+  <text x="374" y="142" text-anchor="middle" font-family="system-ui" font-size="15" font-weight="800" fill="white" opacity="0.85">IMG</text>
+  <!-- Bottom tagline area -->
+  <rect x="96" y="336" width="320" height="56" rx="16" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="256" y="362" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="700" fill="white" opacity="0.9">TransformPDF</text>
+  <text x="256" y="382" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="400" fill="white" opacity="0.5">by Rabiul Hasan</text>
+  <!-- Sparkle dots -->
+  <circle cx="96" cy="96" r="5" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="416" cy="96" r="3" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="416" cy="416" r="5" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="96" cy="416" r="3" fill="rgba(255,255,255,0.3)"/>
+</svg>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="TransformPDF">
+  <meta name="theme-color" content="#0ea5e9" id="themeColorMeta">
+
+  <title>TransformPDF — PDF থেকে ছবিতে | Rabiul Hasan</title>
+  <meta name="description" content="PDF ফাইলকে JPG, PNG, WebP ছবিতে রূপান্তর করুন। বিনামূল্যে, সম্পূর্ণ প্রাইভেট, কোনো সার্ভার নেই। Developer: Rabiul Hasan">
+  <meta name="keywords" content="PDF to image, PDF converter, PDF to JPG, PDF to PNG, Bengali PDF converter, রূপান্তর">
+  <meta name="author" content="Rabiul Hasan">
+
+  <!-- OG Tags -->
+  <meta property="og:title" content="TransformPDF — PDF থেকে ছবিতে">
+  <meta property="og:description" content="PDF ফাইলকে JPG, PNG, WebP ছবিতে রূপান্তর করুন — বিনামূল্যে">
+  <meta property="og:type" content="website">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/logo.svg">
+  <link rel="apple-touch-icon" href="icons/logo.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    /* Inline critical: hide canvas BG in light theme, subtle show */
+    [data-theme="light"] #bgCanvas { opacity: 0.35; }
+    [data-theme="dark"]  #bgCanvas { opacity: 0.7; }
+    /* Smooth theme transition */
+    * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.25s ease; }
+    img, canvas, svg { transition: none !important; }
+    .btn { transition: all 0.25s cubic-bezier(0.4,0,0.2,1) !important; }
+  </style>
+</head>
+<body>
+
+<!-- Background Canvas -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav>
+  <div class="wrapper nav__inner">
+    <a href="#" class="nav__logo">
+      <div class="nav__logo-icon">
+        <img src="icons/logo.svg" alt="TransformPDF Logo" onerror="this.parentElement.textContent='⚡'">
+      </div>
+      TransformPDF
+    </a>
+
+    <div class="nav__right">
+      <div class="nav__status">
+        <span class="nav__status-dot"></span>
+        বিনামূল্যে
+      </div>
+
+      <button class="nav__install" id="installBtn" title="অ্যাপ ইনস্টল করুন">
+        📲 ইনস্টল
+      </button>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="ডার্ক মোডে যান" title="Switch to Dark">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════ -->
+<main id="mainContent">
+  <div class="wrapper">
+
+    <!-- BANNERS -->
+    <div class="offline-banner" id="offlineBanner">📵 অফলাইন মোড — আপলোড করা ফাইলে কাজ করতে পারবেন</div>
+    <div class="update-banner" id="updateBanner" style="display:none">
+      🔄 নতুন আপডেট পাওয়া গেছে!
+      <button class="btn btn--sm btn--primary" id="updateBtn">আপডেট করুন</button>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__eyebrow anim-1">✦ ব্রাউজার-ভিত্তিক · সম্পূর্ণ প্রাইভেট · বিনামূল্যে</div>
+
+      <h1 class="hero__title anim-2" id="heroTitle">
+        PDF থেকে<br>
+        <span class="grad">ছবিতে</span> রূপান্তর
+      </h1>
+
+      <p class="hero__subtitle anim-3">
+        আপনার PDF ফাইলকে উচ্চমানের JPG, PNG বা WebP ছবিতে পরিণত করুন —
+        মুহূর্তের মধ্যে, কোনো সার্ভার ছাড়াই, সম্পূর্ণ গোপনীয়তায়।
+      </p>
+
+      <div class="hero__stats anim-4">
+        <div class="hero__stat">
+          <span class="hero__stat-num"><span data-count="300">0</span>+</span>
+          <span class="hero__stat-label">DPI সাপোর্ট</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num"><span data-count="50">0</span>MB</span>
+          <span class="hero__stat-label">ফাইল সাইজ</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">3</span>
+          <span class="hero__stat-label">ফরম্যাট</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">০%</span>
+          <span class="hero__stat-label">ডেটা লিক</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ SETTINGS CARD ══════ -->
+    <section class="section anim-5 reveal" aria-label="কনফিগারেশন">
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">⚙ কনফিগারেশন</h2>
+        </div>
+        <div class="card__body">
+          <div class="settings-grid">
+
+            <!-- Format -->
+            <div class="s-group">
+              <label>আউটপুট ফরম্যাট</label>
+              <div class="chip-group">
+                <button class="chip-btn active" data-format="jpeg">JPG</button>
+                <button class="chip-btn" data-format="png">PNG</button>
+                <button class="chip-btn" data-format="webp">WebP</button>
+              </div>
+            </div>
+
+            <!-- DPI -->
+            <div class="s-group">
+              <label>রেজোলিউশন</label>
+              <div class="slider-wrap">
+                <div class="slider-track" id="dpiTrack">
+                  <div class="slider-fill" id="dpiFill" style="width:50%"></div>
+                  <div class="slider-thumb" id="dpiThumb" style="left:50%"></div>
+                  <input type="range" class="range-hidden" id="dpiRange"
+                    min="72" max="300" step="36" value="144"
+                    aria-label="DPI রেজোলিউশন">
+                </div>
+                <div class="slider-labels">
+                  <span class="lbl">72</span>
+                  <span class="val" id="dpiValue">144 DPI</span>
+                  <span class="lbl">300</span>
+                </div>
+              </div>
+              <div class="dpi-presets" id="dpiPresets"></div>
+            </div>
+
+            <!-- Quality -->
+            <div class="s-group">
+              <label>ছবির মান</label>
+              <div class="slider-wrap">
+                <div class="slider-track" id="qualTrack">
+                  <div class="slider-fill" id="qualFill" style="width:80%"></div>
+                  <div class="slider-thumb" id="qualThumb" style="left:80%"></div>
+                  <input type="range" class="range-hidden" id="qualRange"
+                    min="60" max="100" step="5" value="92"
+                    aria-label="ছবির মান">
+                </div>
+                <div class="slider-labels">
+                  <span class="lbl">৬০%</span>
+                  <span class="val" id="qualValue">৯২%</span>
+                  <span class="lbl">১০০%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Background -->
+            <div class="s-group">
+              <label>ব্যাকগ্রাউন্ড</label>
+              <div class="chip-group">
+                <button class="chip-btn active" data-bg="white">⬜ সাদা</button>
+                <button class="chip-btn" data-bg="transparent">◻ স্বচ্ছ</button>
+              </div>
+            </div>
+
+            <!-- Color Mode -->
+            <div class="s-group">
+              <label>রঙ মোড</label>
+              <select class="form-select" id="colorMode" aria-label="রঙ মোড">
+                <option value="color">🎨 রঙিন (Color)</option>
+                <option value="grayscale">⬛ ধূসর (Grayscale)</option>
+                <option value="sepia">🟤 সেপিয়া (Sepia)</option>
+              </select>
+            </div>
+
+            <!-- Page Range -->
+            <div class="s-group">
+              <label>পেজ পরিসর</label>
+              <div class="page-range">
+                <input type="number" class="form-input" id="pageFrom"
+                  placeholder="১" min="1" value="1" aria-label="শুরু পেজ">
+                <span class="page-range__sep">—</span>
+                <input type="number" class="form-input" id="pageTo"
+                  placeholder="সব" min="1" aria-label="শেষ পেজ">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ UPLOAD ZONE ══════ -->
+    <section class="section reveal" aria-label="ফাইল আপলোড">
+      <div class="upload-zone" id="uploadZone" role="button"
+        tabindex="0" aria-label="PDF ফাইল আপলোড করুন"
+        onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('fileInput').click()">
+
+        <div class="upload__particles" id="uploadParticles"></div>
+
+        <div class="upload__orbit">
+          <div class="upload__orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="upload__orbit-ring">
+            <div class="orbit-dot orbit-dot--2"></div>
+          </div>
+          <div class="upload__orbit-center">📄</div>
+        </div>
+
+        <h2 class="upload__title">PDF ফাইল এখানে ছেড়ে দিন</h2>
+        <p class="upload__sub">
+          ড্র্যাগ অ্যান্ড ড্রপ করুন অথবা নিচের বোতামে ক্লিক করুন<br>
+          সর্বোচ্চ ফাইল সাইজ: <strong>৫০ MB</strong>
+        </p>
+
+        <button class="btn btn--primary" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          ফাইল বেছে নিন
+        </button>
+
+        <div class="upload__formats">
+          <span class="upload__format-tag">PDF</span>
+          <span class="upload__format-tag">→</span>
+          <span class="upload__format-tag">JPG</span>
+          <span class="upload__format-tag">PNG</span>
+          <span class="upload__format-tag">WebP</span>
+        </div>
+
+        <input type="file" id="fileInput" accept=".pdf" aria-label="PDF ফাইল নির্বাচন করুন" style="display:none">
+      </div>
+    </section>
+
+    <!-- ══════ FILE META BAR ══════ -->
+    <div id="fileMetaBar" class="section" role="status" aria-live="polite">
+      <div class="meta__left">
+        <div class="meta__icon">📋</div>
+        <div>
+          <div class="meta__filename" id="metaFileName">—</div>
+          <div class="meta__detail" id="metaFileDate">—</div>
+        </div>
+      </div>
+      <div class="meta__chips">
+        <div class="meta__chip meta__chip--primary" id="metaPageCount">— পেজ</div>
+        <div class="meta__chip meta__chip--secondary" id="metaFileSize">—</div>
+        <div class="meta__chip">✓ লোড সম্পন্ন</div>
+      </div>
+    </div>
+
+    <!-- ══════ ACTION BAR ══════ -->
+    <div class="section" id="actionBar" role="toolbar" aria-label="অ্যাকশন">
+      <button class="btn btn--primary" id="convertBtn" aria-label="রূপান্তর শুরু করুন">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        রূপান্তর শুরু করুন
+      </button>
+
+      <button class="btn btn--outline" id="downloadZipBtn" style="display:none" aria-label="ZIP ডাউনলোড">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        ZIP ডাউনলোড
+      </button>
+
+      <button class="btn btn--outline" id="downloadAllJpgBtn" style="display:none">
+        ⬇ সব আলাদা সেভ
+      </button>
+
+      <button class="btn btn--outline" id="copyStatsBtn" style="display:none">
+        📊 রিপোর্ট কপি
+      </button>
+
+      <button class="btn btn--danger" id="resetBtn" aria-label="রিসেট">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        রিসেট
+      </button>
+    </div>
+
+    <!-- ══════ PROGRESS ══════ -->
+    <section class="section" id="progressSection" aria-label="রূপান্তর অগ্রগতি" aria-live="polite">
+      <div class="progress-card">
+        <div class="progress-card__scan"></div>
+        <div class="progress__header">
+          <div class="progress__title">
+            <div class="progress__spinner"></div>
+            <span id="progressLabel">রূপান্তর হচ্ছে...</span>
+          </div>
+          <div class="progress__pct" id="progressPct">0%</div>
+        </div>
+        <div class="progress__bar-bg">
+          <div class="progress__bar" id="progressBar"></div>
+        </div>
+        <div class="progress__steps" id="progressSteps"></div>
+      </div>
+    </section>
+
+    <!-- ══════ RESULTS HEADER ══════ -->
+    <div id="resultsHeader" aria-label="রূপান্তরিত ফলাফল">
+      <div class="results__left">
+        <h2 class="results__title">রূপান্তরিত ছবি</h2>
+        <div class="results__count" id="resultCount">0টি</div>
+      </div>
+      <div class="view-toggle" role="group" aria-label="ভিউ পরিবর্তন">
+        <button class="view-btn active" id="viewGrid" aria-label="গ্রিড ভিউ" title="গ্রিড ভিউ">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+        </button>
+        <button class="view-btn" id="viewList" aria-label="লিস্ট ভিউ" title="লিস্ট ভিউ">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/>
+            <circle cx="4" cy="18" r="1" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════ GALLERY ══════ -->
+    <section class="gallery" id="gallery" aria-label="রূপান্তরিত ছবিসমূহ"></section>
+
+  </div><!-- /wrapper -->
+</main>
+
+<!-- ══════════════════════════════════════
+     LIGHTBOX
+══════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="ছবি প্রিভিউ">
+  <div class="lb__card">
+    <div id="lbCounter"></div>
+
+    <button class="lb__close" id="lbClose" aria-label="বন্ধ করুন">✕</button>
+
+    <button class="lb__nav lb__prev" id="lbPrev" aria-label="আগের ছবি">‹</button>
+    <button class="lb__nav lb__next" id="lbNext" aria-label="পরের ছবি">›</button>
+
+    <img id="lbImage" src="" alt="প্রিভিউ">
+
+    <div class="lb__toolbar">
+      <button class="lb__btn" id="lbZoomOut" title="ছোট করুন">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg> ছোট
+      </button>
+      <button class="lb__btn" id="lbReset" title="রিসেট করুন">⟳ রিসেট</button>
+      <button class="lb__btn" id="lbZoomIn" title="বড় করুন">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+        </svg> বড়
+      </button>
+      <button class="lb__btn" id="lbDownload">⬇ ডাউনলোড</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     INSTALL BANNER
+══════════════════════════════════════ -->
+<div class="install-banner" id="installBanner" role="complementary" aria-label="অ্যাপ ইনস্টল">
+  <button class="install-banner__close" id="installBannerClose" aria-label="বন্ধ করুন">✕</button>
+  <div class="install-banner__icon">📲</div>
+  <div class="install-banner__text">
+    <div class="install-banner__title">মোবাইলে ইনস্টল করুন</div>
+    <div class="install-banner__sub">অ্যাপের মতো ব্যবহার করুন — অফলাইনেও কাজ করে</div>
+  </div>
+  <button class="btn btn--primary btn--sm" id="installBannerBtn">ইনস্টল</button>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer" aria-live="polite" aria-label="নোটিফিকেশন"></div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="wrapper">
+    <div class="footer__grid">
+
+      <!-- Brand -->
+      <div>
+        <div class="footer__brand-name">
+          <div class="nav__logo-icon" style="width:28px;height:28px;border-radius:8px;font-size:14px">⚡</div>
+          TransformPDF
+        </div>
+        <p class="footer__brand-desc">
+          PDF ফাইলকে উচ্চমানের ছবিতে রূপান্তর করুন — সম্পূর্ণ বিনামূল্যে, ব্রাউজারেই, কোনো ডেটা আপলোড ছাড়াই।
+        </p>
+        <div class="footer__social">
+          <a href="https://wa.me/8801886828042" class="footer__social-btn" target="_blank" rel="noopener">
+            💬 WhatsApp
+          </a>
+          <a href="mailto:rabiulhasan613@gmail.com" class="footer__social-btn">
+            ✉️ Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Developer -->
+      <div>
+        <div class="footer__col-title">ডেভেলপার</div>
+        <a href="https://wa.me/8801886828042" class="footer__contact-item" target="_blank" rel="noopener">
+          <span>👨‍💻</span> রবিউল হাসান
+        </a>
+        <a href="tel:+8801886828042" class="footer__contact-item">
+          <span>📞</span> +880 1886 828042
+        </a>
+        <a href="https://wa.me/8801886828042" class="footer__contact-item" target="_blank" rel="noopener">
+          <span>💬</span> WhatsApp
+        </a>
+        <a href="mailto:rabiulhasan613@gmail.com" class="footer__contact-item">
+          <span>📧</span> rabiulhasan613@gmail.com
+        </a>
+      </div>
+
+      <!-- Features -->
+      <div>
+        <div class="footer__col-title">ফিচার সমূহ</div>
+        <div class="footer__feature-item">JPG, PNG, WebP রূপান্তর</div>
+        <div class="footer__feature-item">৭২ — ৩০০ DPI রেজোলিউশন</div>
+        <div class="footer__feature-item">গ্রেস্কেল ও সেপিয়া ফিল্টার</div>
+        <div class="footer__feature-item">ZIP বাল্ক ডাউনলোড</div>
+        <div class="footer__feature-item">অফলাইন PWA সাপোর্ট</div>
+        <div class="footer__feature-item">লাইট / ডার্ক থিম</div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__copy">
+        © ২০২৫ TransformPDF · তৈরি করেছেন <strong>রবিউল হাসান</strong> · সর্বস্বত্ব সংরক্ষিত
+      </div>
+      <div class="footer__tech">
+        <span class="footer__tech-tag">PDF.js</span>
+        <span class="footer__tech-tag">Canvas API</span>
+        <span class="footer__tech-tag">JSZip</span>
+        <span class="footer__tech-tag">PWA</span>
+        <span class="footer__tech-tag">v2.0</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     SCRIPTS (ordered by dependency)
+══════════════════════════════════════ -->
+<script src="js/config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/canvas.js"></script>
+<script src="js/converter.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+  // Inject floating particles in upload zone
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('uploadParticles');
+    if (!container) return;
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'upload__particle';
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        bottom: ${Math.random() * 15}%;
+        --dur: ${3 + Math.random() * 4}s;
+        --delay: ${Math.random() * 4}s;
+      `;
+      container.appendChild(p);
+    }
+  });
+</script>
+
+</body>
+</html>

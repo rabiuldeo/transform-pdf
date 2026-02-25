@@ -1,0 +1,144 @@
+/**
+ * TransformPDF — Theme Variables (Light default / Dark optional)
+ * Developer: Rabiul Hasan | rabiulhasan613@gmail.com
+ */
+
+/* ── LIGHT THEME (default) ── */
+:root,
+[data-theme="light"] {
+  /* Brand */
+  --brand-primary: #0ea5e9;
+  --brand-secondary: #6366f1;
+  --brand-tertiary: #a855f7;
+  --brand-gradient: linear-gradient(135deg, #0ea5e9, #6366f1, #a855f7);
+
+  /* Backgrounds */
+  --bg-base: #f0f4f8;
+  --bg-page: #e8edf3;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafb;
+  --bg-card-alt: #f1f5f9;
+  --bg-input: #f8fafc;
+  --bg-badge: rgba(14,165,233,0.08);
+  --bg-overlay: rgba(15, 23, 42, 0.5);
+
+  /* Borders */
+  --border-base: rgba(14,165,233,0.15);
+  --border-card: rgba(0,0,0,0.08);
+  --border-strong: rgba(14,165,233,0.35);
+  --border-input: rgba(0,0,0,0.12);
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-accent: #0ea5e9;
+  --text-inverse: #ffffff;
+
+  /* States */
+  --success: #10b981;
+  --success-bg: rgba(16,185,129,0.08);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245,158,11,0.08);
+  --danger: #ef4444;
+  --danger-bg: rgba(239,68,68,0.08);
+  --info: #0ea5e9;
+  --info-bg: rgba(14,165,233,0.08);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+  --shadow-xl: 0 24px 48px rgba(0,0,0,0.14), 0 8px 16px rgba(0,0,0,0.08);
+  --shadow-brand: 0 8px 32px rgba(14,165,233,0.25);
+  --shadow-glow: 0 0 0 4px rgba(14,165,233,0.15);
+
+  /* Particles */
+  --particle-opacity: 0.5;
+  --particle-color: 14, 165, 233;
+
+  /* Nav */
+  --nav-bg: rgba(240,244,248,0.85);
+
+  /* Upload */
+  --upload-border: rgba(14,165,233,0.2);
+  --upload-border-hover: rgba(14,165,233,0.5);
+
+  /* Gallery */
+  --gallery-border: rgba(0,0,0,0.07);
+  --gallery-border-hover: rgba(14,165,233,0.3);
+  --gallery-shadow-hover: 0 16px 40px rgba(14,165,233,0.15);
+
+  /* Progress */
+  --progress-bg: rgba(0,0,0,0.06);
+
+  /* Chip */
+  --chip-bg: rgba(0,0,0,0.05);
+  --chip-border: rgba(0,0,0,0.1);
+  --chip-active-bg: rgba(14,165,233,0.1);
+  --chip-active-border: rgba(14,165,233,0.4);
+
+  /* Footer */
+  --footer-bg: #e2e8f0;
+  --footer-border: rgba(0,0,0,0.08);
+
+  /* Transition */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── DARK THEME ── */
+[data-theme="dark"] {
+  --bg-base: #050810;
+  --bg-page: #080c18;
+  --bg-card: #0d1220;
+  --bg-card-hover: #111828;
+  --bg-card-alt: #141c2e;
+  --bg-input: #0a0f1a;
+  --bg-badge: rgba(14,165,233,0.12);
+  --bg-overlay: rgba(0,0,0,0.85);
+
+  --border-base: rgba(14,165,233,0.12);
+  --border-card: rgba(255,255,255,0.06);
+  --border-strong: rgba(14,165,233,0.3);
+  --border-input: rgba(255,255,255,0.1);
+
+  --text-primary: #e8f0fe;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #475569;
+  --text-accent: #38bdf8;
+  --text-inverse: #0f172a;
+
+  --success: #34d399;
+  --success-bg: rgba(52,211,153,0.08);
+  --warning: #fbbf24;
+  --warning-bg: rgba(251,191,36,0.08);
+  --danger: #f87171;
+  --danger-bg: rgba(248,113,113,0.08);
+  --info: #38bdf8;
+  --info-bg: rgba(56,189,248,0.08);
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+  --shadow-xl: 0 24px 48px rgba(0,0,0,0.6);
+  --shadow-brand: 0 8px 32px rgba(14,165,233,0.2);
+  --shadow-glow: 0 0 0 4px rgba(14,165,233,0.2);
+
+  --particle-opacity: 0.8;
+  --particle-color: 14, 165, 233;
+
+  --nav-bg: rgba(5,8,16,0.85);
+  --upload-border: rgba(14,165,233,0.15);
+  --upload-border-hover: rgba(14,165,233,0.4);
+  --gallery-border: rgba(255,255,255,0.06);
+  --gallery-border-hover: rgba(14,165,233,0.3);
+  --gallery-shadow-hover: 0 16px 40px rgba(14,165,233,0.1);
+  --progress-bg: rgba(255,255,255,0.05);
+  --chip-bg: rgba(255,255,255,0.04);
+  --chip-border: rgba(255,255,255,0.08);
+  --chip-active-bg: rgba(14,165,233,0.1);
+  --chip-active-border: rgba(14,165,233,0.35);
+  --footer-bg: #040710;
+  --footer-border: rgba(255,255,255,0.06);
+}
